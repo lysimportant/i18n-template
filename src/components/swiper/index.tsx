@@ -42,7 +42,7 @@ export default function LSwiper({
   const [firstImgOffset, SetFirstImgOffest] = useState(false);
   const [lastImgOffset, SetLastImgOffest] = useState(false);
 
-  const ToggleCurrIndexClick = async (payload: number) => {
+  const onClickIndexButton = async (payload: number) => {
     console.log("onToggleCurrIndexClick", payload, currIndexRef.current);
     let next = currIndexRef.current + payload;
 
@@ -83,6 +83,20 @@ export default function LSwiper({
     }
   };
 
+  const onClickIndexIndicator = (payload: number) => {
+    const diff = payload + 1 - currIndexRef.current;
+    if (diff === 0) return;
+    else if (diff > 0) {
+      for (let i = 0; i < diff; i++) {
+        onClickIndexButton(1);
+      }
+    } else {
+      for (let i = 0; i < -diff; i++) {
+        onClickIndexButton(-1);
+      }
+    }
+  };
+
   async function waitContainerTransitionEnd() {
     const swiperContainerElement: HTMLDivElement = document.querySelector(
       ".l_swiper_container"
@@ -105,7 +119,7 @@ export default function LSwiper({
       const now = Date.now();
       if (now - lastNextTime.current > 3000) {
         lastNextTime.current = now;
-        ToggleCurrIndexClick(1);
+        onClickIndexButton(1);
       }
       startNext();
     });
@@ -157,7 +171,7 @@ export default function LSwiper({
         <button
           className="bg-white/60 rounded-md transition-all hover:bg-white/95 absolute top-1/2 left-0 border block mx-3 px-3 py-3"
           onClick={() => {
-            ToggleCurrIndexClick(-1);
+            onClickIndexButton(-1);
           }}
         >
           <ArrowLeftIcon></ArrowLeftIcon>
@@ -165,7 +179,7 @@ export default function LSwiper({
         <button
           className="bg-white/60 rounded-md transition-all hover:bg-white/95 absolute top-1/2 right-0 border block mx-3 px-3 py-3"
           onClick={() => {
-            ToggleCurrIndexClick(1);
+            onClickIndexButton(1);
           }}
         >
           <ArrowRightIcon></ArrowRightIcon>
@@ -175,7 +189,7 @@ export default function LSwiper({
           {arr.map((item, index) => (
             <li
               key={item}
-              onClick={() => ToggleCurrIndexClick(index)}
+              onClick={() => onClickIndexIndicator(index)}
               style={{
                 padding: currIndex - 1 == index ? "6px 8px" : "4px 6px",
                 background:
