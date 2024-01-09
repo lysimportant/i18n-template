@@ -181,7 +181,7 @@ export default function LSwiper({
                 background:
                   currIndex - 1 == index ? "rgba(37, 99, 235, 0.8)" : "",
               }}
-              className="bg-white/50 rounded-full mx-2"
+              className="bg-white/50 rounded-full mx-2 cursor-pointer"
             ></li>
           ))}
         </ul>
