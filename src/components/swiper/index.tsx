@@ -39,20 +39,16 @@ export default function LSwiper({
   const [currIndex, SetCurrIndex] = useState(1);
 
   const currIndexRef = useRef(currIndex);
+  const [firstImgOffset, SetFirstImgOffest] = useState(false);
+  const [lastImgOffset, SetLastImgOffest] = useState(false);
 
   const ToggleCurrIndexClick = async (payload: number) => {
     console.log("onToggleCurrIndexClick", payload, currIndexRef.current);
     let next = currIndexRef.current + payload;
 
-    const firstElement: HTMLDivElement =
-      document.querySelector(".l_swiper_img0")!;
-    const lastElement: HTMLDivElement = document.querySelector(
-      `.l_swiper_img${arr.length - 1}`
-    )!;
-
     if (next === arr.length + 1) {
-      lastElement.style.transform = `translateX(-${outerWidth * arr.length}px)`;
       next = 0;
+      SetLastImgOffest(true);
       SetTransition(false);
       SetCurrIndex(next);
       currIndexRef.current = next;
@@ -63,12 +59,11 @@ export default function LSwiper({
         currIndexRef.current = 1;
 
         await waitContainerTransitionEnd();
-        firstElement.style.transform = `none`;
-        lastElement.style.transform = `none`;
+        SetLastImgOffest(false);
       });
     } else if (next === 0) {
-      firstElement.style.transform = `translateX(${outerWidth * arr.length}px)`;
       next = arr.length + 1;
+      SetFirstImgOffest(true);
       SetTransition(false);
       SetCurrIndex(next);
       currIndexRef.current = next;
@@ -79,8 +74,7 @@ export default function LSwiper({
         currIndexRef.current = arr.length;
 
         await waitContainerTransitionEnd();
-        firstElement.style.transform = `none`;
-        lastElement.style.transform = `none`;
+        SetFirstImgOffest(false);
       });
     } else {
       SetTransition(true);
@@ -144,8 +138,16 @@ export default function LSwiper({
           {arr.map((src, index) => (
             <img
               key={src}
-              className={`w-full h-full object-cover l_swiper_img${index}`}
-              style={{ width: outerWidth }}
+              className="w-full h-full object-cover"
+              style={{
+                width: outerWidth,
+                transform:
+                  index === 0 && firstImgOffset
+                    ? `translateX(${outerWidth * arr.length}px)`
+                    : index === arr.length - 1 && lastImgOffset
+                    ? `translateX(-${outerWidth * arr.length}px)`
+                    : "",
+              }}
               src={src}
               alt=""
             />
