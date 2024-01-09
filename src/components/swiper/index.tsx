@@ -51,15 +51,17 @@ export default function LSwiper({ children }: { children?: React.ReactNode, arr?
       clear()
     }
   }, [])
-  return <div className="l_swiper relative">
+  return <div 
+  onMouseEnter={() => clearInterval(timer)}
+  onMouseLeave={() => ControllerAutoPlaySwiperClick()}
+  className="l_swiper relative">
     <div
       style={{
         width: window.innerWidth * arr.length + "%",
         transform: `translateX(-${window.innerWidth * currIndex.current}px)`,
         transition: "all .3s"
       }}
-      onMouseEnter={() => clearInterval(timer)}
-      onMouseLeave={() => ControllerAutoPlaySwiperClick()}
+
       className="clearfix flex l_swiper_container h-96">
       <img
         style={{ width: window.innerWidth }}
@@ -99,8 +101,10 @@ export default function LSwiper({ children }: { children?: React.ReactNode, arr?
           key={item}
           onClick={() => ToggleCurrIndexClick(index)}
           style={{
-            padding: currIndex.current - 1 == index ? "6px 8px" : "4px 6px",
-            background: currIndex.current - 1 == index ? "rgba(37, 99, 235, 0.8)" : ""
+            padding: currIndex.current - 1 == index ? "2px 8px" : "2px 6px",
+            background: currIndex.current - 1 == index ? "rgba(37, 99, 235, 0.8)" :
+             currIndex.current > arr.length && index == 0 ?  "rgba(37, 99, 235, 0.8)" :
+             currIndex.current == 0 && index == arr.length - 1 ?  "rgba(37, 99, 235, 0.8)" : ""
           }}
           className="bg-white/50 rounded-full mx-2">
         </li>)}
