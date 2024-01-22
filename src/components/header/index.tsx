@@ -5,6 +5,8 @@ import LNavigation from '@/ui/navigation/navigation';
 import { useTranslation } from 'react-i18next';
 import Link from 'next/link';
 import i18n from '@/i18n';
+import { useRouter, usePathname } from 'next/navigation';
+
 
 export default function CustomHeader() {
     const pageArr = [
@@ -21,6 +23,10 @@ export default function CustomHeader() {
             label: "dataDownPage"
         },
         {
+            path: "/technology",
+            label: "technologyPage"
+        },
+        {
             path: "/contact",
             label: "contactPage"
         }
@@ -33,16 +39,19 @@ export default function CustomHeader() {
         value: "en"
     }, {
         label: "Русский",
-        value: "be"
+        value: "ru"
     }]
+    const path = usePathname()
     const [language, setLanguage] = useState("中文")
     function ToggleLaguage(item: any) {
         i18n!.changeLanguage(item.value)
         setLanguage(item.label)
     }
-    const CallBackTggleLanguage = React.useCallback(ToggleLaguage, [language])
+    const CallBackTggleLanguage = React.useCallback(ToggleLaguage, [])
     const { t } = useTranslation()
-    return <header className=" h-52 overflow-hidden">
+    const router = useRouter()
+
+    return <header className=" h-52 overflow-hidden bg-white">
         <div className="h-10 items-center bg-gray-50 shadow">
             <div className="flex justify-between items-center max-w-7xl mx-auto">
                 <div className='h-10 leading-10'>{t("Welcome")} </div>
@@ -86,9 +95,10 @@ export default function CustomHeader() {
                 </div>
             </div>
         </div>
-        <div className='bg-blue-600'>
+        <div 
+            className='bg-blue-600'>
             <ul className='flex max-w-7xl mx-auto text-white'>
-                {pageArr.map(item => <li key={item.path} className='px-8 py-3'>
+                {pageArr.map((item, index) => <li style={{ background: item.path == path ? "#13439d": ""}} key={item.path} className='px-12 py-3'>
                     <Link href={item.path}>{t(item.label)}</Link>
                 </li>)}
             </ul>

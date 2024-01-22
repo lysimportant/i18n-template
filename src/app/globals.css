@@ -8,3 +8,13 @@
 .clearfix:after {
     clear:both;
 }
+.text-over {
+    display: inline-block;
+    white-space: nowrap;
+    width: 100%;
+    overflow: hidden;
+    text-overflow:ellipsis;
+}
+.w-e-scroll {
+    overflow-y: hidden!important;
+}

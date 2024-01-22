@@ -1,16 +1,18 @@
 <script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
+import { onMounted } from 'vue';
+import { RouterView } from 'vue-router'
+import { useUserStore } from './stores';
+const userStore = useUserStore()
+onMounted(() => {
+  const info = localStorage.getItem("i18n_template_userinfo")
+  const us = localStorage.getItem("i18n_template_users")
+  us !== null && (userStore.users = JSON.parse(us) )
+  info !== null && (userStore.user = JSON.parse(info))
+})
+
 </script>
-
 <template>
-
-  <div>12
   <RouterView />
-    
-    312
-  </div>
-
 </template>
 
-<style>
-</style>
+<style scoped></style>

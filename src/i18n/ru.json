@@ -8,5 +8,11 @@
   "homePage": "Дом",
   "productCenterPage": "Продукция",
   "dataDownPage": "Скачивание данных",
-  "contactPage": "Свяжитесь с нами"
+  "technologyPage": "Обмен технологиями",
+  "contactPage": "Свяжитесь с нами",
+  "homeTitle": "Горячие продажи товаров",
+  "technologyTitle": "Технические рекомендации",
+  "product-1": "Лазерный датчик перемещения",
+  "product-2": "Лазерный датчик профиля",
+  "product-type": "Type"
 }

@@ -8,5 +8,11 @@
   "homePage": "首页",
   "productCenterPage": "产品中心",
   "dataDownPage": "资料下载",
-  "contactPage": "联系我们"
+  "technologyPage": "技术分享",
+  "contactPage": "联系我们",
+  "homeTitle": "热销产品",
+  "technologyTitle": "技术参考",
+  "product-1": "激光位移传感器",
+  "product-2": "激光轮廓传感器",
+  "product-type": "类型"
 }

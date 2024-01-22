@@ -8,5 +8,11 @@
   "homePage": "Home Page",
   "productCenterPage": "Product Center",
   "dataDownPage": "Information Download",
-  "contactPage": "Contact us"
+  "technologyPage": "Technology sharing",
+  "contactPage": "Contact us",
+  "homeTitle": "Best-selling Products",
+  "technologyTitle": "Technical References",
+  "product-1": "Laser Displacement Sensor",
+  "product-2": "Laser Profiling Sensor",
+  "product-type": "Type"
 }

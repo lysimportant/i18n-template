@@ -10,6 +10,10 @@ const nextConfig = {
             {
                 protocol: 'https',
                 hostname: 'images.wallpaperscraft.com',
+            },
+            {
+                protocol: "https",
+                hostname: "lianghj.top"
             }
         ]
     },

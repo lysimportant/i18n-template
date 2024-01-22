@@ -5,3 +5,6 @@ declare module "*.vue" {
   const components: DefineComponent
   export default components
 }
+
+declare module '@wangeditor/editor-for-vue';
+
