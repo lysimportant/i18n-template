@@ -10,7 +10,7 @@ import Be from "./ru.json"
 // or even better, manage them separated from your code: https://react.i18next.com/guides/multiple-translation-files)
 let i: typeof i18n | null = null
 function Initi18n(lng = "zh") {
-  let language = localStorage.getItem("i18nextLng") ?? lng
+  // let language = localStorage.getItem("i18nextLng") ?? lng
   i18n
   .use(Language)
   .use(initReactI18next) // passes i18n down to react-i18next
@@ -26,7 +26,7 @@ function Initi18n(lng = "zh") {
         translation: Be
       }
     },
-    lng: language, // language to use, more information here: https://www.i18next.com/overview/configuration-options#languages-namespaces-resources
+    lng: lng, // language to use, more information here: https://www.i18next.com/overview/configuration-options#languages-namespaces-resources
     // you can use the i18n.changeLanguage function to change the language manually: https://www.i18next.com/overview/api#changelanguage
     // if you're using a language detector, do not define the lng option
     interpolation: {

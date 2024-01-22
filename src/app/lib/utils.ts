@@ -2,10 +2,7 @@ export async function fetcher<JSON = any>(
   input: RequestInfo,
   init?: RequestInit,
 ): Promise<JSON> {
-  if (typeof input === "string") {
-    input = "http://localhost:8080" + input
-  }
-  const res = await fetch(input, init);
+  const res = await fetch("http://120.79.36.108:60023"  + input, init);
   if (!res.ok) {
     const json = await res.json();
     if (json.error) {

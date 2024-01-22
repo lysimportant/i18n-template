@@ -22,7 +22,7 @@ export default function App() {
     );
   };
   function GetData() {
-    fetch("http://localhost:8080/lds?language=" + i18n?.language).then(async res => {
+    fetch("http://lianghj.top:60012/lds?language=" + i18n?.language).then(async res => {
       console.log("-=> ",);
       const data = await res.json()
       setLDS(data.data)

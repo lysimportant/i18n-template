@@ -30,13 +30,17 @@ export default function ArticleDetail () {
         if (otherInfo) {}
     })
     const getArticleDetail = async () => {
-        const res = await fetcher("/article?id="+p.id)
+        // const res = await fetcher("/article?id="+p.id)
+        let res = await fetch("http://lianghj.top:60012/article?id="+p.id)
+        const {data} = await res.json()
+        console.log("=> data ", data);
+        
         setOtherInfo({
-            title: res.data.title,
-            description: res.data.description,
-            language: res.data.language
+            title: data.title,
+            description: data.description,
+            language: data.language
         })
-        setHtml(res.data.content)
+        setHtml(data.content)
     }
     useEffect(() => {
         getArticleDetail()

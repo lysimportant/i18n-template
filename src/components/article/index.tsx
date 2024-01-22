@@ -12,8 +12,12 @@ export default function ShowArticle (){
     const router = useRouter()
     const { t } = useTranslation()
     const getArticle = async () => {
-        const res = await fetcher(`/article?language=${i18n?.language}&title=`)
-        setData(res.data)
+        // const res = await fetcher()
+        const res = await fetch(`http://lianghj.top:60012/article?language=${i18n?.language}&title=`)
+        const {data} = await res.json()
+        console.log(" => ", data);
+        
+        setData(data)
     }
 
     i18n?.on("languageChanged", async () => {
