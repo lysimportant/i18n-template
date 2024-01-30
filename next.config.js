@@ -18,6 +18,18 @@ const nextConfig = {
         ]
     },
     reactStrictMode: false,
+    i18n: {
+        locales: ["zh", "en", "ru"],
+        defaultLocale: "zh",
+        domains: [
+            {
+                domain: "localhost",
+                defaultLocale: "zh",
+                locales: ["zh", "en", "ru"],
+            }
+            
+        ]
+    }
 }
 
 module.exports = nextConfig

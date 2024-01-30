@@ -4,11 +4,12 @@ import {useEffect, useState} from "react";
 import {ChevronRightIcon, ListBulletIcon} from "@radix-ui/react-icons";
 import {useTranslation} from "react-i18next";
 import Link from 'next/link'
-import { useParams, useRouter } from "next/navigation";
+import { useParams, useRouter, usePathname } from "next/navigation";
 
 export default function ShowArticle (){
     const [data, setData] = useState<any[]>([])
     const p = useParams()
+    const path = usePathname()
     const router = useRouter()
     const { t } = useTranslation()
     const getArticle = async () => {
@@ -21,7 +22,9 @@ export default function ShowArticle (){
     }
 
     i18n?.on("languageChanged", async () => {
-        if (p.id) {
+        console.log("=> ", path);
+        
+        if (p.id && path.includes("technology")) {
             router.push("/technology")
         }
         await getArticle()
