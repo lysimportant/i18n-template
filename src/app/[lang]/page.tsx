@@ -30,8 +30,8 @@ export default function App() {
       </div>
     );
   };
-  function GetData() {
-    fetch("http://lianghj.top:60012/lds?language="+params.lang).then(
+  function GetData(lang: string) {
+    fetch("https://lianghj.top/i18n/lds?language="+lang).then(
       async (res) => {
         const data = await res.json();
         setLDS(data.data);
@@ -39,8 +39,8 @@ export default function App() {
     );
   }
   useEffect(() => {
-    GetData();
-  }, []);
+    GetData(params.lang as string);
+  }, [params]);
   return (
     <main>
       <LSwiper></LSwiper>

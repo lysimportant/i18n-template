@@ -12,7 +12,7 @@ export default function ShowArticle (){
     const t = useTranslations("technology")
     const getArticle = async () => {
         // 获取数据
-        const res = await fetch(`http://lianghj.top:60012/article?language=${lang}&title=`)
+        const res = await fetch(`https://lianghj.top/i18n/article?language=${lang}&title=`)
         const {data} = await res.json()
         setData(data)
     }

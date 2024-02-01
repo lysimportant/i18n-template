@@ -23,7 +23,7 @@ export default function ArticleDetail () {
     const getArticleDetail = async () => {
         // const res = await fetcher("/article?id="+p.id)
 
-        let res = await fetch("http://lianghj.top:60012/article?id="+params.id)
+        let res = await fetch("https://lianghj.top/i18n/article?id="+params.id)
         const {data} = await res.json()
         // if (params.lang != data.language) {
         //     console.log("=> params.lang != data.language ", params.lang != data.language)
