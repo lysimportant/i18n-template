@@ -42,15 +42,14 @@ export default function CustomHeader({ lang }:{ lang: string } ) {
         value: "ru"
     }]
     const path = usePathname()
-
+    const params = useParams()
     const t = useTranslations("header")
     function ToggleLanguage(item: any) {
         console.log("item, path", item, path)
         // 第一种情况: 没有进入文章详情
-        const basePath = path.replace(/(zh|en|ru)/, item.value)
-        router.replace(basePath, {
-            scroll: true
-        })
+        const basePath = path.replace(/^\/(zh|en|ru)/, "/"+item.value)
+        console.log("=> basePath ", basePath, params)
+        router.push(basePath)
 
         // console.log("Test ", item, path, basePath)
         // if (basePath.includes("technology")) {
