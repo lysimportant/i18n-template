@@ -1,8 +1,8 @@
 // "use client";
 import { Inter } from 'next/font/google'
+import {NextIntlClientProvider, useMessages, useLocale } from 'next-intl';
 import CustomHeader from '@/components/header'
 import './globals.css'
-import i18n from "@/i18n"
 const inter = Inter({ subsets: ['latin'] })
 import { Metadata } from 'next/types'
 export const metadata: Metadata = {
@@ -16,11 +16,15 @@ function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+    const message = useMessages()
+    const lang = useLocale()
   return (
-    <html lang="zh">
+    <html lang={lang}>
       <body className={inter.className + " min-w-[1280px]"}>
-        <CustomHeader></CustomHeader>
+      <NextIntlClientProvider messages={message}>
+        <CustomHeader lang={lang}></CustomHeader>
         {children}
+      </NextIntlClientProvider>
       </body>
     </html>
   )

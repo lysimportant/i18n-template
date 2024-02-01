@@ -1,5 +1,7 @@
 /** @type {import('next').NextConfig} */
-// import "./src/i18n"
+import createNextIntlPlugin from 'next-intl/plugin';
+const withNextIntl = createNextIntlPlugin()
+
 const nextConfig = {
     images: {
         remotePatterns: [
@@ -18,18 +20,6 @@ const nextConfig = {
         ]
     },
     reactStrictMode: false,
-    i18n: {
-        locales: ["zh", "en", "ru"],
-        defaultLocale: "zh",
-        domains: [
-            {
-                domain: "localhost",
-                defaultLocale: "zh",
-                locales: ["zh", "en", "ru"],
-            }
-            
-        ]
-    }
 }
 
-module.exports = nextConfig
+export default withNextIntl(nextConfig)

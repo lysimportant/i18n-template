@@ -1,0 +1,25 @@
+{
+  "header": {
+    "welcome": "Welcome to our website",
+    "company": "Guangzhou Dongsong Technology Co., Ltd",
+    "connect": "Consultation service hotline",
+    "info": "The company's main business: laser displacement sensors, laser profile sensors and project applications",
+    "tel": "139-2464-9961",
+    "language": "English",
+    "home-page": "Home Page",
+    "product-center-page": "Product Center",
+    "data-down-page": "Information Download",
+    "technology-page": "Technology sharing",
+    "contact-page": "Contact us"
+  },
+  "home": {
+    "title": "Best-selling Products",
+    "first-product": "Inductive smart sensors",
+    "second-product": "Capacitive smart sensors",
+    "third-product": "Photoelectric smart sensors",
+    "product-type": "Type"
+  },
+  "technology": {
+    "title": "Technical References"
+  }
+}

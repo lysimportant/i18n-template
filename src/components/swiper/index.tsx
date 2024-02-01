@@ -38,16 +38,15 @@ export default function LSwiper({
   const [currIndex, SetCurrIndex] = useState(1);
 
   const currIndexRef = useRef(currIndex);
-  const [firstImgOffset, SetFirstImgOffest] = useState(false);
-  const [lastImgOffset, SetLastImgOffest] = useState(false);
+  const [firstImgOffset, SetFirstImgOffset] = useState(false);
+  const [lastImgOffset, SetLastImgOffset] = useState(false);
 
   const onChangeCurrentIndex = async (payload: number) => {
-    console.log("onToggleCurrIndexClick", payload, currIndexRef.current);
     let next = payload;
 
     if (next === arr.length + 1) {
       next = 0;
-      SetLastImgOffest(true);
+      SetLastImgOffset(true);
       SetTransition(false);
       SetCurrIndex(next);
       currIndexRef.current = next;
@@ -58,11 +57,11 @@ export default function LSwiper({
         currIndexRef.current = 1;
 
         await waitContainerTransitionEnd();
-        SetLastImgOffest(false);
+        SetLastImgOffset(false);
       });
     } else if (next === 0) {
       next = arr.length + 1;
-      SetFirstImgOffest(true);
+      SetFirstImgOffset(true);
       SetTransition(false);
       SetCurrIndex(next);
       currIndexRef.current = next;
@@ -73,7 +72,7 @@ export default function LSwiper({
         currIndexRef.current = arr.length;
 
         await waitContainerTransitionEnd();
-        SetFirstImgOffest(false);
+        SetFirstImgOffset(false);
       });
     } else {
       SetTransition(true);
@@ -88,7 +87,6 @@ export default function LSwiper({
     );
     await new Promise((resolve) => {
       const onEnd = () => {
-        console.log("onEnd");
         resolve("");
         swiperContainerElement?.removeEventListener("transitionend", onEnd);
       };

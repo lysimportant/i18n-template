@@ -2,36 +2,36 @@
 import Image from 'next/image'
 import React, { useState } from 'react';
 import LNavigation from '@/ui/navigation/navigation';
-import { useTranslation } from 'react-i18next';
 import Link from 'next/link';
-import i18n from '@/i18n';
-import { useRouter, usePathname } from 'next/navigation';
+import {useRouter, usePathname, useParams} from 'next/navigation';
+import {useTranslations} from "next-intl";
 
-
-export default function CustomHeader() {
+export default function CustomHeader({ lang }:{ lang: string } ) {
+    const router = useRouter()
     const pageArr = [
         {
-            path: "/",
-            label: "homePage",
+            path: "",
+            label: "home-page",
         },
         {
             path: "/product",
-            label: "productCenterPage",
+            label: "product-center-page",
         },
         {
             path: "/information",
-            label: "dataDownPage"
+            label: "data-down-page"
         },
         {
             path: "/technology",
-            label: "technologyPage"
+            label: "technology-page"
         },
         {
             path: "/contact",
-            label: "contactPage"
+            label: "contact-page"
         }
     ]
-    const languages = [{
+    const languages = [
+    {
         label: "中文",
         value: "zh"
     }, {
@@ -42,25 +42,38 @@ export default function CustomHeader() {
         value: "ru"
     }]
     const path = usePathname()
-    const [language, setLanguage] = useState("中文")
-    function ToggleLaguage(item: any) {
-        i18n!.changeLanguage(item.value)
-        setLanguage(item.label)
-    }
-    const CallBackTggleLanguage = React.useCallback(ToggleLaguage, [])
-    const { t } = useTranslation()
-    const router = useRouter()
 
-    return <header className=" h-52 overflow-hidden bg-white">
+    const t = useTranslations("header")
+    function ToggleLanguage(item: any) {
+        console.log("item, path", item, path)
+        // 第一种情况: 没有进入文章详情
+        const basePath = path.replace(/(zh|en|ru)/, item.value)
+        router.replace(basePath, {
+            scroll: true
+        })
+
+        // console.log("Test ", item, path, basePath)
+        // if (basePath.includes("technology")) {
+        //     console.log("includes: technology")
+        //     const fullPath = `/${item.value}/${basePath.split("/")[1]}`
+        //     router.push(fullPath)
+        //     return
+        // }
+
+    }
+    const CallBackToggleLanguage = React.useCallback(ToggleLanguage, [])
+    return <header className=" h-72 overflow-hidden bg-white">
         <div className="h-10 items-center bg-gray-50 shadow">
             <div className="flex justify-between items-center max-w-7xl mx-auto">
-                <div className='h-10 leading-10'>{t("Welcome")} </div>
+                <div className='h-10 leading-10'>
+                    {t("welcome")}
+                </div>
                 <ul className="flex gap-2">
                     <li>
                         <LNavigation>
                             {languages.map(item =>
                                 <div
-                                    onClick={() => CallBackTggleLanguage(item)}
+                                    onClick={() => CallBackToggleLanguage(item)}
                                     key={item.value}
                                     className='outline-0 px-10 py-3 hover:bg-gray-100'
                                 >
@@ -75,7 +88,9 @@ export default function CustomHeader() {
         <div className="max-w-7xl flex justify-between h-24 items-center m-auto my-3">
             <div className='w-3/4'>
                 <div className="flex items-center gap-1">
-                    <span style={{ color: "rgb(26, 65, 153)" }} className="text-[32px] mr-2 font-bold">{t("company")}</span>
+                    <span style={{ color: "rgb(26, 65, 153)" }} className="text-[32px] mr-2 font-bold">
+                        {t("company")}
+                    </span>
                     <Image priority className='w-auto h-auto' width={220} height={32} src="https://28399727.s21i.faiusr.com/4/ABUIABAEGAAgl8rmkAYouP6EgQUw1gE4IA.png" alt="logo" />
                 </div>
                 <h1 className="">{t("info")}</h1>
@@ -96,10 +111,19 @@ export default function CustomHeader() {
             </div>
         </div>
         <div 
-            className='bg-blue-600'>
+            className='bg-blue-600 h-24'>
             <ul className='flex max-w-7xl mx-auto text-white'>
-                {pageArr.map((item, index) => <li style={{ background: item.path == path ? "#13439d": ""}} key={item.path} className='px-12 py-3'>
-                    <Link href={item.path}>{t(item.label)}</Link>
+                {pageArr.map((item, index) =>
+                    <li style={{ background: `/${lang}${item.path}` == path ? "#13439d": ""}}
+                        key={item.path}
+                        className='px-12 py-3'
+                    >
+                    <Link href={`/${lang}${item.path}`}>
+                        {t(item.label)}
+                        <br/>
+                        {`/${lang}${item.path}`}
+                    </Link>
+
                 </li>)}
             </ul>
         </div>

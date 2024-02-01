@@ -1,0 +1,25 @@
+{
+  "header": {
+    "welcome": "欢迎光临本站",
+    "company": "广州东松科技",
+    "connect": "咨询服务热线",
+    "info": "公司主营：激光位移传感器，激光轮廓传感器以及项目应用",
+    "tel": "139-2464-9961",
+    "language": "中文",
+    "home-page": "首页",
+    "product-center-page": "产品中心",
+    "data-down-page": "资料下载",
+    "technology-page": "技术分享",
+    "contact-page": "联系我们"
+  },
+  "home": {
+    "title": "热销产品",
+    "first-product": "电感式智能传感器",
+    "second-product": "电容式智能传感器",
+    "third-product": "光电式智能传感器",
+    "product-type": "类型"
+  },
+  "technology": {
+    "title": "技术参考"
+  }
+}

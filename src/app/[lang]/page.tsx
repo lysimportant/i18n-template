@@ -1,34 +1,29 @@
 "use client";
 import LSwiper from "@/components/swiper";
 import LLayout from "@/components/layout/layout";
-import { useTranslation } from "react-i18next";
 import Link from "next/link";
-import { ListBulletIcon } from "@radix-ui/react-icons";
 import ShowArticle from "@/components/article";
 import { useEffect, useState } from "react";
-import i18n from "@/i18n";
 import Image from "next/image";
 import { useRouter } from "next/router";
+import {useTranslations} from "next-intl";
+import {useParams} from "next/navigation";
 export default function App() {
-  const { t } = useTranslation();
   const [lds, setLDS] = useState([]);
-  // const { defaultLocale , locale, locales, asPath} = useRouter()
-  useEffect(() => {
-    // console.log("=> ", defaultLocale , locale, locales, asPath);
-    
-  }, [])
+  const t = useTranslations("home")
+    const params = useParams()
   const custom = () => {
     return (
       <div>
         <ul style={{ backgroundColor: "rgb(2, 50, 87)" }}>
           <li className="py-5 px-8 cursor-pointer">
-            <Link href="/inductive">{t("product-1")}</Link>
+            <Link href={`/${params.lang}/inductive`}>{t("first-product")}</Link>
           </li>
           <li className="py-5 px-8 cursor-pointer">
-            <Link href="/capacitive">{t("product-2")}</Link>
+            <Link  href={`/${params.lang}/capacitive`} >{t("second-product")}</Link>
           </li>
           <li className="py-5 px-8 cursor-pointer">
-            <Link href="/photoelectric">{t("product-3")}</Link>
+            <Link  href={`/${params.lang}/photoelectric`} >{t("third-product")}</Link>
           </li>
         </ul>
         <ShowArticle></ShowArticle>
@@ -36,17 +31,13 @@ export default function App() {
     );
   };
   function GetData() {
-    fetch("http://lianghj.top:60012/lds?language=" + i18n?.language).then(
+    fetch("http://lianghj.top:60012/lds?language="+params.lang).then(
       async (res) => {
-        console.log("-=> ");
         const data = await res.json();
         setLDS(data.data);
       }
     );
   }
-  i18n?.on("languageChanged", () => {
-    GetData();
-  });
   useEffect(() => {
     GetData();
   }, []);
@@ -56,13 +47,14 @@ export default function App() {
       <LLayout customCom={custom} title="homeTitle" isShouImg>
         <div>
           <h2 className="text-xl font-semibold p-1 bg-gray-300/40">
-            {t("product-1")}
+            {t("first-product")}
           </h2>
+
           <ul className="flex items-center justify-center">
             {lds?.map((item: any) => {
               return (
                 <li key={item.ID} className="flex-1 text-center  h-56">
-                  <div className="h-3/4 ">
+                  <div className="h-3/4">
                     <Image
                       width={200}
                       height={80}
@@ -85,7 +77,7 @@ export default function App() {
         </div>
         <div className="mt-3">
           <h2 className="text-xl font-semibold p-1 bg-gray-300/40">
-            {t("product-2")}
+            {t("second-product")}
           </h2>
           <ul className="flex items-center justify-center">
             <li className="flex-1 text-center bg-red-200 h-56">1</li>

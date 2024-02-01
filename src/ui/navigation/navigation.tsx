@@ -4,11 +4,11 @@ import * as NavigationMenu from '@radix-ui/react-navigation-menu';
 import { useState } from 'react';
 import { motion, AnimatePresence } from "framer-motion"
 import { GlobeIcon } from "@radix-ui/react-icons"
-import { useTranslation } from 'react-i18next';
+import {useTranslations} from "next-intl";
 
 export default function LNavigation({ children }: { children?: React.ReactNode }) {
   const [flagOpen, setFlag] = useState(false)
-  const { t } = useTranslation()
+  const t = useTranslations("header")
 
   return <NavigationMenu.Root onValueChange={(v) => {
     if (v) {

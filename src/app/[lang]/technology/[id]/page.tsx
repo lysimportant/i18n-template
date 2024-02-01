@@ -3,12 +3,8 @@ import React, { useState, useEffect } from 'react'
 import {useParams, useRouter} from "next/navigation";
 import { Editor, Toolbar } from '@wangeditor/editor-for-react'
 import { IDomEditor, IEditorConfig, IToolbarConfig } from '@wangeditor/editor'
-
-
 import '@wangeditor/editor/dist/css/style.css'
-import {fetcher} from "@/app/lib/utils";
 import ShowArticle from "@/components/article";
-import i18n from "@/i18n"; // 引入 css
 
 export default function ArticleDetail () {
     const [editor, setEditor] = useState<IDomEditor | null>(null)   // TS 语法
@@ -18,23 +14,22 @@ export default function ArticleDetail () {
         description: "",
         language: ""
     })
-    const p = useParams()
-    const r = useRouter()
-    const editorConfig: Partial<IEditorConfig> = {    // TS 语法
-        // const editorConfig = {                         // JS 语法
+    const params = useParams()
+    const router = useRouter()
+    const editorConfig: Partial<IEditorConfig> = {
         placeholder: '请输入内容...',
         readOnly: true
     }
-    i18n?.on("languageChanged", (e) => {
-        console.log(e, otherInfo)
-        if (otherInfo) {}
-    })
     const getArticleDetail = async () => {
         // const res = await fetcher("/article?id="+p.id)
-        let res = await fetch("http://lianghj.top:60012/article?id="+p.id)
+
+        let res = await fetch("http://lianghj.top:60012/article?id="+params.id)
         const {data} = await res.json()
-        console.log("=> data ", data);
-        
+        // if (params.lang != data.language) {
+        //     console.log("=> params.lang != data.language ", params.lang != data.language)
+        //     router.push(`/${params.lang}/technology`)
+        //     return
+        // }
         setOtherInfo({
             title: data.title,
             description: data.description,
@@ -43,6 +38,7 @@ export default function ArticleDetail () {
         setHtml(data.content)
     }
     useEffect(() => {
+        console.log("=> technology")
         getArticleDetail()
     }, [])
     useEffect(() => {
